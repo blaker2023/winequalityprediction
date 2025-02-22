@@ -1,0 +1,31 @@
+name: Deploy to Heroku
+
+on:
+  push:
+    branches:
+      - main  # Deploys when you push to main branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Login to Heroku Container Registry
+      env:
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+      run: heroku container:login
+
+    - name: Build and Push Docker Image to Heroku
+      env:
+        HEROKU_APP_NAME: week3winequalityprediction
+      run: |
+        heroku container:push web -a $HEROKU_APP_NAME
+
+    - name: Release the App on Heroku
+      env:
+        HEROKU_APP_NAME: week3winequalityprediction
+      run: |
+        heroku container:release web -a $HEROKU_APP_NAME
