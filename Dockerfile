@@ -1,20 +1,24 @@
-# Use an official Python image
+# Use Python 3.9 as the base image
 FROM python:3.9
 
-# Set the working directory inside the container
+# Set the working directory
 WORKDIR /app
 
-# Copy requirements file and install dependencies
-COPY requirements.txt requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt
-
 # Copy all necessary files
+COPY requirements.txt requirements.txt
 COPY train_model.py train_model.py
 COPY app.py app.py
-COPY wine_quality_model.pkl wine_quality_model.pkl
+COPY model.pkl model.pkl
+COPY scaler.pkl scaler.pkl
 
-# Expose the port Flask runs on
+# **FIX: Copy templates directory**
+COPY templates/ templates/
+
+# Install dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Expose port 5000 for Flask
 EXPOSE 5000
 
-# Command to run the API
+# Run the Flask application
 CMD ["python", "app.py"]

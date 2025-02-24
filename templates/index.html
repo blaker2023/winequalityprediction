@@ -1,56 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wine Quality Prediction</title>
 </head>
 <body>
     <h1>Wine Quality Prediction</h1>
-
     <form action="/predict" method="post">
-        <label>Fixed Acidity:</label>
-        <input type="text" name="fixed_acidity" required><br>
-
-        <label>Volatile Acidity:</label>
-        <input type="text" name="volatile_acidity" required><br>
-
-        <label>Citric Acid:</label>
-        <input type="text" name="citric_acid" required><br>
-
-        <label>Residual Sugar:</label>
-        <input type="text" name="residual_sugar" required><br>
-
-        <label>Chlorides:</label>
-        <input type="text" name="chlorides" required><br>
-
-        <label>Free Sulfur Dioxide:</label>
-        <input type="text" name="free_sulfur_dioxide" required><br>
-
-        <label>Total Sulfur Dioxide:</label>
-        <input type="text" name="total_sulfur_dioxide" required><br>
-
-        <label>Density:</label>
-        <input type="text" name="density" required><br>
-
-        <label>pH:</label>
-        <input type="text" name="pH" required><br>
-
-        <label>Sulfates:</label>
-        <input type="text" name="sulfates" required><br>
-
-        <label>Alcohol:</label>
-        <input type="text" name="alcohol" required><br>
-
-        <label>Wine Type:</label>
+        Fixed Acidity: <input type="text" name="fixed_acidity"><br>
+        Volatile Acidity: <input type="text" name="volatile_acidity"><br>
+        Citric Acid: <input type="text" name="citric_acid"><br>
+        Residual Sugar: <input type="text" name="residual_sugar"><br>
+        Chlorides: <input type="text" name="chlorides"><br>
+        Free Sulfur Dioxide: <input type="text" name="free_sulfur_dioxide"><br>
+        Total Sulfur Dioxide: <input type="text" name="total_sulfur_dioxide"><br>
+        Density: <input type="text" name="density"><br>
+        pH: <input type="text" name="pH"><br>
+        Sulfates: <input type="text" name="sulfates"><br>
+        Alcohol: <input type="text" name="alcohol"><br>
+        Wine Type:
         <select name="wine_type">
-            <option value="0">Red Wine</option>
-            <option value="1">White Wine</option>
+            <option value="Red Wine">Red Wine</option>
+            <option value="White Wine">White Wine</option>
         </select><br>
-
-        <button type="submit">Predict</button>
+        <input type="submit" value="Predict">
     </form>
 
-    <h2>{{ prediction_text }}</h2>
+    {% if prediction %}
+        <h2>{{ prediction }}</h2>
+    {% endif %}
 </body>
 </html>
